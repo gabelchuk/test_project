@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <!--<form action="https://www.google.com/search">-->
+        <!--<label for="fname">City:</label><br>-->
+        <!--<input type="text" id="fname" name="q"><br>-->
+        <!--<input type="submit" value="Submit">-->
+    <!--</form>-->
+
+    <!--<form method="POST" action=""> {% csrf_token %}-->
+        <!--<label for="fname">City:</label><br>-->
+        <!--<input type="text" id="fname" name="citi"><br>-->
+        <!--<input type="submit" value="Submit">-->
+    <!--</form>-->
+
+    <!--<form action="">-->
+        <!--<label>Мова програмування:</label><br>-->
+        <!--<input type="text" name="language"><br>-->
+        <!--<label>Місто:</label><br>-->
+        <!--<input type="text" name="citi"><br>-->
+        <!--<input type="submit" value="Submit">-->
+    <!--</form>-->
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form action="">
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Знайти</button>
+        </form>
+    </div>
+</div>
+
+    {% for obj in object_list %}
+        <div class="card text my-3">
+          <div class="card-header">
+              <p><a href="{{obj.url}}" target="_blank">{{obj.title}}</a></p>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{obj.company}} | {{obj.language.name}} |
+             {{obj.citi.name}}</h5>
+            <p class="card-text">{{obj.description}}</p>
+          </div>
+          <div class="card-footer text-muted">
+            {{obj.timestamp}}
+          </div>
+        </div>
+
+    {% empty %}
+        <h3 class="text-center">За Вашим запитом нічого не знайдено.</h3>
+
+    {% endfor %}
+{% endblock %}
